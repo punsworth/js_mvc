@@ -1,10 +1,10 @@
 <% $.each(this, function(i, activity){ %>
-  <li <%= ($el) -> $el.model(activity) %>>
+  <li class="grid" <%= ($el) -> $el.model(activity) %>>
   	<a href="activityDeatils.html?activity=<%= activity.id %>" class='activityDetails'>
+		GRID <br>
 		<%= activity.title %>
+
 		<br />
-		<%= activity.description %>
-		<hr />
 		<%= activity.description %>
     </a>
   </li>

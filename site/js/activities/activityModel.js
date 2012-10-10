@@ -12,7 +12,7 @@ $.Model('Activity',{
 	var ACTIVITIES = [
 		{
 			id: 0,
-			title: 'Golf Evening',
+			title: 'Golf Evening Drinking',
 			time: "5:00 pm",
 			day: 'Friday',
 			suburb:  null,
@@ -34,7 +34,7 @@ $.Model('Activity',{
 			involvement: 'independent',
 			type: 'sport',
 			activity: 'surfing',
-			description: 'this Wednsday evening'
+			description: 'Next Wednsday evening'
 		}
 	];
 	
