@@ -8,10 +8,24 @@ steal('jquery/class',
       function($){
 
 		// THE CONTROLLER SETS UP LISTENER FUNCTIONS, CALLS VIEWS AND SETS UP EVENTS
-		$.Controller("Activities",{
+		$.Controller("ActivitiesDetail",{
 		  "init" : function( element , options ){
-		    this.viewTemplate = options.viewTemplate;
-			this.element.append(this.viewTemplate, Activity.findAll() )
+		      //console.log("controller:", Activity.findOne({id:1}));
+		      this.viewTemplate = options.viewTemplate;
+		      var scope = this;
+		      Activity.findOne({id:options.page},
+    		      function(suc){
+        		      console.log("found 1", suc);
+        		      scope.element.append(scope.viewTemplate, suc)
+    		      },
+    		      function(e){
+        		      console.log("found error", e);
+    /*     		      this.element.append(this.viewTemplate,  ) */
+		          }
+		      )
+		      
+		      
+			
 		  },
 		  "{Activity} created" : function(Activity, ev , activity){
 			this.element.append(this.viewTemplate, [activity])
@@ -31,10 +45,16 @@ steal('jquery/class',
 		})
 		
 		// INITIALIZE ON PAGE LOAD
-		var MVC = MVC || {};
-		var temp = MVC.viewRoute || 'js/activities/activityListView.ejs';
-		new Activities('#activityList', {viewTemplate: temp});
-		
+		new ActivitiesDetail('#activityDetail', {page: getUrlVars()['activity'], viewTemplate: 'js/activities/activityDetailView.ejs'});
+        console.log(getUrlVars()['activity']);		
+		function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
 		
 		
 		// CREATE A NEW ACTIVITY

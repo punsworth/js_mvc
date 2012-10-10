@@ -1,13 +1,15 @@
 $.Model('Activity',{
 				findAll : "GET /activities",
-				findOne : "GET /activities/{id}",
+				findOne : "GET /activities/one/{id}",
 				create  : "POST /activities",
 				update  : "PUT /activities/{id}",
 				destroy : "DELETE /activities/{id}"
 			},
 			{}
 		)
-  
+function getAct(){
+    return ACTIVITIES;
+}
   // THE INITIAL ARRAY OF ACTIVITIES
 	var ACTIVITIES = [
 		{
@@ -38,20 +40,43 @@ $.Model('Activity',{
 		}
 	];
 	
-	// findAll
+	var getOne = function(index) {
+    	return ACTIVITIES[index];
+	}
+	
+	
+// findAll
 	$.fixture("GET /activities", function(orig){
 	  return [ACTIVITIES]
 	});
 	
-	// findOne
-	var id= 4;
-	/*$.fixture("GET /activities/{id}", function(orig){
-	  return ACTIVITIES[(+orig.data.id)-1];
-	})*/
+	$.fixture("GET /activities/one/{id}", function(orig){
+	 
+	  if(orig.data.id > ACTIVITIES.length) {
+    	  return [401,"{type: 'unauthorized'}"]
+	  } else {
+    	  return [200, "success", {json: ACTIVITIES[orig.data.id] }, {} ];
+	  }
+	  
+	});
+
+	/*
+$.fixture("GET /activities/{id}", function(orig){
+	  console.log("get one:", orig);
+	   for (var i=0; i<ACTIVITIES.length-1; i++) {
+	       console.log("act", ACTIVITIES[i]);
+    	   if(ACTIVITIES[i]) {
+        	   //if(ACTIVITIES[i].id == orig.data.id) return ACTIVITIES[i];
+    	   } 
+	   }
+	  return null;
+	});
+*/
+
 	
 	// create
 	$.fixture("POST /activities", function(){
-	  return {id: (id++)}
+	  return {id: (ACTIVITIES.length + 1)}
 	})
 	
 	// update
@@ -63,6 +88,7 @@ $.Model('Activity',{
 	$.fixture("DELETE /activities/{id}", function(){
 	  return {};
 	})
+
 	
 	// BIND LISTENERS
 	Activity.bind('created', function(ev, singleActivity){/* callback */})
