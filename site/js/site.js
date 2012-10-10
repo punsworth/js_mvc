@@ -2,22 +2,21 @@ steal('jquery/class',
       'jquery/controller',
       'jquery/model',
       'jquery/view/ejs',
-      'jquery/dom/fixture')
-	  .then(
+      'jquery/dom/fixture',
 	  'js/activityModel.js',
       function($){
 
 		// THE CONTROLLER SETS UP LISTENER FUNCTIONS, CALLS VIEWS AND SETS UP EVENTS
 		$.Controller("Activities",{
 		  "init" : function( element , options ){
-			  //var activities = Activity.findAll();
-			this.element.append('js/activityListView.ejs', Activity.findAll() )
+			  var activities = Activity.findAll();
+			this.element.append('js/activityView.ejs', Activity.findAll() )
 		  },
 		  "{Activity} created" : function(Activity, ev , activity){
-			this.element.append('js/activityListView.ejs', [activity])
+			this.element.append('js/activityView.ejs', [activity])
 		  },
 		  "{Activity} updated" : function(Activity, ev , activity){
-			this.element.append('js/activityListView.ejs', [activity])
+			this.element.append('js/activityView.ejs', [activity])
 		  },
 			submit : function(el, ev){
 			  ev.preventDefault();
@@ -31,9 +30,13 @@ steal('jquery/class',
 		})
 		
 		// INITIALIZE ON PAGE LOAD
-		new Activities('#activityList', {});
+		$(document).ready(function(e) {
+           new Activities('#activityList', {}); 
+        });
 		
-		
+		// BIND LISTENERS
+		Activity.bind('created', function(ev, singleActivity){/* callback */})
+		Activity.bind('updated', function(ev, singleActivity){/* callback */})
 		
 		// CREATE A NEW ACTIVITY
 		var singleActivity = new Activity({

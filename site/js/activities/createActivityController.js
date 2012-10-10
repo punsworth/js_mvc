@@ -4,20 +4,19 @@ steal('jquery/class',
       'jquery/view/ejs',
       'jquery/dom/fixture')
 	  .then(
-	  'js/activityModel.js',
+	  'js/activities/activityModel.js',
       function($){
 
 		// THE CONTROLLER SETS UP LISTENER FUNCTIONS, CALLS VIEWS AND SETS UP EVENTS
 		$.Controller("Activities",{
 		  "init" : function( element , options ){
-			  //var activities = Activity.findAll();
-			this.element.append('js/activityListView.ejs', Activity.findAll() )
+			//this.element.append('js/activities/createActivityView.ejs', Activity.findAll() )
 		  },
 		  "{Activity} created" : function(Activity, ev , activity){
-			this.element.append('js/activityListView.ejs', [activity])
+			//this.element.append('js/activities/createActivityView.ejs', [activity])
 		  },
 		  "{Activity} updated" : function(Activity, ev , activity){
-			this.element.append('js/activityListView.ejs', [activity])
+			//this.element.append('js/activities/createActivityView.ejs', [activity])
 		  },
 			submit : function(el, ev){
 			  ev.preventDefault();
@@ -31,12 +30,134 @@ steal('jquery/class',
 		})
 		
 		// INITIALIZE ON PAGE LOAD
-		new Activities('#activityList', {});
+		//new Activities('#createActivityForm', {});
+		
+		$("#createActivityForm").submit(function(event){
+            return validate();
+        });
+	
+	
+	
+	function validate() {
+		var title = $("#title").val();
+		var time = $("#time").val();
+		var day = $("#day").val();
+		var suburb = $("#suburb").val();
+		var city = $("#city").val();
+		var zipcode = $("#zipcode").val();
+		var involvement = $("#select-involvement").val();
+		var type = $("#select-type").val();
+		var activity = $("#specificActivity").val();
+		var description = $("#description").val();
+		
+		var error = "";
+		var submitForm = true;
+		
+		if (title=="") {
+			error += "Please enter a title <br />";
+			$("#title").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#title").css('background','#fff');
+		}
+		
+		if (time=="") {
+			error += "Please select a time <br />";
+			$("#time").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#time").css('background','#fff');
+		}
+		
+		if (day=="") {
+			error += "Please select a day <br />";
+			$("#day").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#day").css('background','#fff');
+		}
+		
+		if (suburb=="") {
+			error += "Please enter a suburb <br />";
+			$("#suburb").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#suburb").css('background','#fff');
+		}
+		
+		if (city=="") {
+			error += "Please enter a city <br />";
+			$("#city").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#city").css('background','#fff');
+		}
+		
+		if (zipcode=="") {
+			error += "Please enter a zipcode <br />";
+			$("#zipcode").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#zipcode").css('background','#fff');
+		}
+		
+		if (involvement=="") {
+			error += "Please select an involvement type <br />";
+			$("#involvement").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#involvement").css('background','#fff');
+		}
+		
+		if (type=="") {
+			error += "Please select an activity type <br />";
+			$("#type").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#type").css('background','#fff');
+		}
+		
+		if (activity=="") {
+			error += "Please enter an activity <br />";
+			$("#activity").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#activity").css('background','#fff');
+		}
+		
+		if (description=="") {
+			error += "Please enter an activity <br />";
+			$("#description").css('background','#fdff5a');
+			submitForm = false;
+		}
+		else {
+			$("#description").css('background','#fff');
+		}
+		
+		if (submitForm) {
+			console.log('true');
+			//return true;
+		}
+		else {
+			console.log('false');
+			//error_message.html(error);
+			//return false
+		}
+	}
 		
 		
 		
-		// CREATE A NEW ACTIVITY
-		var singleActivity = new Activity({
+		// #################### CREATE A NEW ACTIVITY - SWITCH THE BELOW OUT FOR FORM DATA ####################
+		/*var singleActivity = new Activity({
 			id: 2,
 			title: 'Surfing Today',
 			time: "2:00 pm",
@@ -48,10 +169,9 @@ steal('jquery/class',
 			type: 'sport',
 			activity: 'surfing',
 			description: 'time for a wave'
-		})
+		})*/
 		
-		// SAVE THE NEW ACTIVITY
-		singleActivity.save();
+		//singleActivity.save();
 
 
 

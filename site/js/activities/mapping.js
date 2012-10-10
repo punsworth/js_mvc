@@ -4,20 +4,20 @@ steal('jquery/class',
       'jquery/view/ejs',
       'jquery/dom/fixture')
 	  .then(
-	  'js/activityModel.js',
+	  'js/activities/activityModel.js',
       function($){
 
 		// THE CONTROLLER SETS UP LISTENER FUNCTIONS, CALLS VIEWS AND SETS UP EVENTS
 		$.Controller("Activities",{
 		  "init" : function( element , options ){
 			  //var activities = Activity.findAll();
-			this.element.append('js/activityListView.ejs', Activity.findAll() )
+			this.element.append('js/activities/activityListView.ejs', Activity.findAll() )
 		  },
 		  "{Activity} created" : function(Activity, ev , activity){
-			this.element.append('js/activityListView.ejs', [activity])
+			this.element.append('js/activities/activityListView.ejs', [activity])
 		  },
 		  "{Activity} updated" : function(Activity, ev , activity){
-			this.element.append('js/activityListView.ejs', [activity])
+			this.element.append('js/activities/activityListView.ejs', [activity])
 		  },
 			submit : function(el, ev){
 			  ev.preventDefault();
