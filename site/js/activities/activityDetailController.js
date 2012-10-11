@@ -1,3 +1,4 @@
+console.log("steal start?");
 steal('jquery/class',
       'jquery/controller',
       'jquery/model',

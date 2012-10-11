@@ -75,9 +75,13 @@
             g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
             s.parentNode.insertBefore(g,s)}(document,"script"));*/
         </script>
-        <script type='text/javascript'>
+        
+        <script type='text/javascript' src='steal/steal.js'>
+            //steal()
         </script>
-        <script type='text/javascript' src='steal/steal.js?js/activities/activityDetailController.js'></script>
+        <script type='text/javascript'>
+            steal('js/activities/activityDetailController.js');
+        </script>
         
         
     </body>

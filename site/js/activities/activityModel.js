@@ -7,9 +7,7 @@ $.Model('Activity',{
 			},
 			{}
 		)
-function getAct(){
-    return ACTIVITIES;
-}
+
   // THE INITIAL ARRAY OF ACTIVITIES
 	var ACTIVITIES = [
 		{
