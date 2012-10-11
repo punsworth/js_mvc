@@ -6,11 +6,11 @@ steal('jquery/class',
 	  .then(
 	  'js/activities/activityModel.js',
       function($){
-
+          console.log("page code");
 		// THE CONTROLLER SETS UP LISTENER FUNCTIONS, CALLS VIEWS AND SETS UP EVENTS
 		$.Controller("ActivitiesDetail",{
 		  "init" : function( element , options ){
-		      //console.log("controller:", Activity.findOne({id:1}));
+		      console.log("controller:", options);
 		      this.viewTemplate = options.viewTemplate;
 		      var scope = this;
 		      Activity.findOne({id:options.page},
@@ -46,7 +46,9 @@ steal('jquery/class',
 		
 		// INITIALIZE ON PAGE LOAD
 		new ActivitiesDetail('#activityDetail', {page: getUrlVars()['activity'], viewTemplate: 'js/activities/activityDetailView.ejs'});
-        console.log(getUrlVars()['activity']);		
+        
+        //$('#activityDetail').activitiesDetail();
+        
 		function getUrlVars() {
             var vars = {};
             var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
