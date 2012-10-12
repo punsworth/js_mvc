@@ -39,7 +39,7 @@ steal('jquery/class',
 		
 		
 		// CREATE A NEW ACTIVITY
-		/*
+		
 		var singleActivity = new Activity({
 			id: 2,
 			title: 'Surfing Today',
@@ -56,7 +56,7 @@ steal('jquery/class',
 		
 		// SAVE THE NEW ACTIVITY
 		singleActivity.save();
-		*/
+		
   
   
 });
